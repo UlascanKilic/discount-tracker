@@ -1,7 +1,3 @@
-import requests
-from bs4 import BeautifulSoup
-import json
-import re
 from selenium.webdriver import Chrome, ChromeOptions
 from selenium.webdriver.common.by import By
 
