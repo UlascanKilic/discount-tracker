@@ -10,8 +10,8 @@ def gethm(url):
     driver.get(url)
     print(driver.title)
 
-    getPrices(driver)
-
+    prices =getPrices(driver)
+    getSizes(driver)
     driver.quit()
 
 
@@ -32,7 +32,15 @@ def getPrices(driver):
         prices[1] = (parentPriceElement.find_element(by=By.XPATH, value="span").text)
 
 
+def getSizes(driver):
+    parentSizeElement = driver.find_elements(by=By.CLASS_NAME, value="ListGrid-module--item__3n3A-")
+    isAvailable = False
+    for size in parentSizeElement:
+        labelElement = size.find_element(by=By.XPATH, value="label")
+        sizeElement = labelElement.get_attribute("for")
+        if labelElement.get_attribute("aria-disabled"):
+            isAvailable = False
+        else:
+            isAvailable = True
 
-
-
-    print(prices)
+        print("size ", sizeElement, "is available ", isAvailable)
